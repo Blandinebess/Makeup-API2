@@ -70,6 +70,7 @@
                         <th>Name</th>
                         <th>Description</th>
                         <th>Price</th>
+                        <th>Link</th>
                     </tr>
                 </thead>
                 <tbody id="productTableBody"></tbody>
@@ -146,6 +147,7 @@
                                     <h5>${p.name}</h5>
                                     <p>${p.description?.substring(0, 80) || 'No description'}</p>
                                     <span class="badge bg-secondary">${p.price}$</span>
+                                    <a href="${p.product_link}" target="_blank" class="btn btn-primary mt-2">View Product</a>
                                 </div>
                             </div>
                         </div>`;
@@ -155,7 +157,8 @@
                         <td><img src="${p.image_link}" width="50" alt="${p.name}"></td>
                         <td>${p.name}</td>
                         <td>${p.description?.substring(0, 80) || 'No description'}</td>
-                        <td>${p.price}$</td>`;
+                        <td>${p.price}$</td>
+                        <td><a href="${p.product_link}" target="_blank" class="btn btn-success btn-sm">View</a></td>`;
                     tableBody.appendChild(row);
                 });
             } catch {
@@ -166,10 +169,8 @@
         });
 
         function toggleView() {
-            const productList = document.getElementById('productResults');
-            const productTable = document.getElementById('productTable');
-            productList.classList.toggle("d-none");
-            productTable.classList.toggle("d-none");
+            document.getElementById('productResults').classList.toggle("d-none");
+            document.getElementById('productTable').classList.toggle("d-none");
         }
     </script>
 
