@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Glam Guide – Home</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-dark"
+      role="navigation"
+      aria-label="Main navigation"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Glam Guide</a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="finder.html">Finder</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="container my-5">
+      <h1 class="display-4">Welcome to Glam Guide</h1>
+      <p class="lead">
+        Discover your perfect makeup products by brand and type – powered by the
+        Makeup API.
+      </p>
+      <a href="finder.html" class="btn btn-primary">Start Exploring</a>
+    </header>
+
+    <section class="container my-5">
+      <h2>Navigate Through Glam Guide</h2>
+      <img
+        src="https://media.istockphoto.com/id/2155031694/photo/a-set-of-makeup-brushes-and-beauty-products-arranged-on-a-desk-at-the-beauticians-salon.jpg?s=1024x1024&w=is&k=20&c=M0mSBqwgzoxj1SRhhb-Leer0C9aUKhwsu6R5NP7Ra2U="
+        alt="Makeup Map"
+        class="img-fluid"
+      />
+      <map name="glammap">
+        <area shape="rect" coords="0,0,200,300" href="index.html" alt="Home" />
+        <area
+          shape="rect"
+          coords="200,0,400,300"
+          href="finder.html"
+          alt="Finder"
+        />
+        <area
+          shape="rect"
+          coords="400,0,600,300"
+          href="about.html"
+          alt="About"
+        />
+      </map>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-3">
+      <p class="mb-0">© 2025 Glam Guide</p>
+    </footer>
+  </body>
+</html>
