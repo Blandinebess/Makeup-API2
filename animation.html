@@ -1,100 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Makeup Gallery with Modal</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Makeup Gallery with Modal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <!-- Navigation Bar -->
-<nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="finder.html">Finder</a>
-    <a href="animation.html">Gallery</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="finder.html">Finder</a>
+      <a href="animation.html">Gallery</a>
     </nav>
-    
-<h1>Makeup Products</h1>
 
-<div class="search-box">
-<input type="text" id="searchInput" placeholder="Search by product name...">
-</div>
+    <h1>Makeup Products</h1>
 
-<div class="gallery" id="product-gallery"></div>
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search by product name..."
+      />
+    </div>
 
-<!-- Modal -->
-<div id="productModal" class="modal">
-<div class="modal-content">
-<span class="close-btn" onclick="closeModal()">&times;</span>
-<img id="modalImage" src="" alt="">
-<h2 id="modalName"></h2>
-<p id="modalBrand"></p>
-<p id="modalPrice"></p>
-<p id="modalDescription"></p>
-</div>
-</div>
+    <div class="gallery" id="product-gallery"></div>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Modal -->
+    <div id="productModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <img id="modalImage" src="" alt="" />
+        <h2 id="modalName"></h2>
+        <p id="modalBrand"></p>
+        <p id="modalPrice"></p>
+        <p id="modalDescription"></p>
+      </div>
+    </div>
 
-<script>
-AOS.init({ duration: 1000, once: true });
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-let allProducts = [];
+    <script>
+      AOS.init({ duration: 1000, once: true });
 
-function renderProducts(products) {
-const gallery = document.getElementById('product-gallery');
-gallery.innerHTML = '';
+      let allProducts = [];
 
-products.forEach((product, index) => {
-const card = document.createElement('div');
-card.className = 'card';
-card.setAttribute('data-aos', index % 2 === 0 ? 'fade-up' : 'zoom-in');
-card.innerHTML = `
+      function renderProducts(products) {
+        const gallery = document.getElementById("product-gallery");
+        gallery.innerHTML = "";
+
+        products.forEach((product, index) => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.setAttribute(
+            "data-aos",
+            index % 2 === 0 ? "fade-up" : "zoom-in"
+          );
+          card.innerHTML = `
 <img src="${product.image_link}" alt="${product.name}">
 <div class="card-content">
 <h3>${product.name}</h3>
 </div>
 `;
-card.addEventListener('click', () => openModal(product));
-gallery.appendChild(card);
-});
+          card.addEventListener("click", () => openModal(product));
+          gallery.appendChild(card);
+        });
 
-AOS.refresh();
-}
+        AOS.refresh();
+      }
 
-function openModal(product) {
-document.getElementById('modalImage').src = product.image_link;
-document.getElementById('modalName').innerText = product.name;
-document.getElementById('modalBrand').innerText = `Brand: ${product.brand || 'N/A'}`;
-document.getElementById('modalPrice').innerText = `Price: $${product.price || 'N/A'}`;
-document.getElementById('modalDescription').innerText = product.description || 'No description available.';
-document.getElementById('productModal').style.display = 'block';
-}
+      function openModal(product) {
+        document.getElementById("modalImage").src = product.image_link;
+        document.getElementById("modalName").innerText = product.name;
+        document.getElementById("modalBrand").innerText = `Brand: ${
+          product.brand || "N/A"
+        }`;
+        document.getElementById("modalPrice").innerText = `Price: $${
+          product.price || "N/A"
+        }`;
+        document.getElementById("modalDescription").innerText =
+          product.description || "No description available.";
+        document.getElementById("productModal").style.display = "block";
+      }
 
-function closeModal() {
-document.getElementById('productModal').style.display = 'none';
-}
+      function closeModal() {
+        document.getElementById("productModal").style.display = "none";
+      }
 
-// Search filter
-document.getElementById('searchInput').addEventListener('input', function () {
-const keyword = this.value.toLowerCase();
-const filtered = allProducts.filter(p => p.name.toLowerCase().includes(keyword));
-renderProducts(filtered);
-});
+      // Search filter
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", function () {
+          const keyword = this.value.toLowerCase();
+          const filtered = allProducts.filter((p) =>
+            p.name.toLowerCase().includes(keyword)
+          );
+          renderProducts(filtered);
+        });
 
-// Fetch products
-fetch('https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline')
-.then(res => res.json())
-.then(data => {
-allProducts = data.slice(0, 50);
-renderProducts(allProducts);
-})
-.catch(err => {
-console.error('API error:', err);
-document.getElementById('product-gallery').innerHTML = '<p>Could not load products.</p>';
-});
-</script>
-</body>
+      // Fetch products
+      fetch(
+        "https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline"
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          allProducts = data.slice(0, 50);
+          renderProducts(allProducts);
+        })
+        .catch((err) => {
+          console.error("API error:", err);
+          document.getElementById("product-gallery").innerHTML =
+            "<p>Could not load products.</p>";
+        });
+    </script>
+  </body>
 </html>
